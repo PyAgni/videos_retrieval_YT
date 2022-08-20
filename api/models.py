@@ -14,3 +14,8 @@ class Video(models.Model):
 
     def __str__(self):
         return f'Title:{str(self.title)}\nURL:{YT_BASE_URL + str(self.youtube_video_id)}'
+
+
+class APIKey(models.Model):
+    api_key = models.CharField(max_length=50, unique=True)
+    has_expired = models.BooleanField(default=False, null=False)
