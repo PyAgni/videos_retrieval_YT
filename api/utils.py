@@ -54,11 +54,11 @@ def parse_youtube_search_response(response):
     for item in response['items']:
         video_data = dict()
         if item['id']['kind'] == 'youtube#video':
-            video_data['video_id'] = item['id']['videoId']
+            video_data['youtube_video_id'] = item['id']['videoId']
             video_data['published_at'] = item['snippet']['publishedAt']
             video_data['title'] = item['snippet']['title']
             video_data['description'] = item['snippet']['description']
-            video_data['thumbnail'] = item['snippet']['thumbnails']['default']['url']
+            video_data['thumbnail_url'] = item['snippet']['thumbnails']['default']['url']
 
         videos.append(video_data)
 
