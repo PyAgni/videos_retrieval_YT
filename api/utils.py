@@ -44,3 +44,22 @@ def get_youtube_videos(search_query, max_results):
             return {"message": "FAILURE", "result": "Failed to get results from YT."}
 
     return {"message": "FAILURE", "result": "Failed to get results from YT."}
+
+
+def parse_youtube_search_response(response):
+    """
+    Parse required data from YouTube's search API response.
+    """
+    videos = []
+    for item in response['items']:
+        video_data = dict()
+        if item['id']['kind'] == 'youtube#video':
+            video_data['video_id'] = item['id']['videoId']
+            video_data['published_at'] = item['snippet']['publishedAt']
+            video_data['title'] = item['snippet']['title']
+            video_data['description'] = item['snippet']['description']
+            video_data['thumbnail'] = item['snippet']['thumbnails']['default']['url']
+
+        videos.append(video_data)
+
+    return videos
