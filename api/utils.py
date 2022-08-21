@@ -1,3 +1,4 @@
+from dateutil import parser
 from datetime import datetime, timedelta
 
 from api.models import APIKey
@@ -55,7 +56,7 @@ def parse_youtube_search_response(response):
         video_data = dict()
         if item['id']['kind'] == 'youtube#video':
             video_data['youtube_video_id'] = item['id']['videoId']
-            video_data['published_at'] = item['snippet']['publishedAt']
+            video_data['published_at'] = parser.parse(item['snippet']['publishedAt'])
             video_data['title'] = item['snippet']['title']
             video_data['description'] = item['snippet']['description']
             video_data['thumbnail_url'] = item['snippet']['thumbnails']['default']['url']
